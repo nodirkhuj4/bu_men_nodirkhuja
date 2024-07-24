@@ -94,13 +94,13 @@ class UserContactApplication(BaseModel):
     full_name= models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=25, null=True)
     message = models.TextField(max_length=500)
-    file = models.FileField(upload_to="%Y/%M/")
+    file = models.FileField(upload_to="%Y/%M/", null=True)
 
     source = models.CharField(max_length=3, 
-                              choices=SourceChoice.choices)
+                              choices=SourceChoice.choices, default=SourceChoice.LANDING)
     
     is_contacted = models.BooleanField(default=False)
-    
+
     def __str__(self) -> str:
         return self.full_name
     

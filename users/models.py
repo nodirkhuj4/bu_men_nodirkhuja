@@ -41,13 +41,13 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=64)
-    balance = models.PositiveBigIntegerField()
+    balance = models.PositiveBigIntegerField(default=50000)
     is_pro = models.BooleanField(default=False)
-    pro_finish_at = models.DateTimeField()
+    pro_finish_at = models.DateTimeField(auto_now_add=True)
     language = models.CharField(max_length=2, 
-                                choices=Language.choices)
+                                choices=Language.choices, default=Language.UZ)
     score = models.PositiveBigIntegerField()
-    
+
     username = None
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -62,20 +62,5 @@ class User(AbstractUser):
         db_table = 'users'
 
 
-class UserContactApplication(BaseModel):
-    full_name = models.CharField(max_length=255)
-    phone = models.CharField(max_length=50, unique=True)
-    message = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    is_contacted = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.full_name
-
-    class Meta:
-        verbose_name = _('User Contact Application')
-        verbose_name_plural = _('User Contact Applications')
-        db_table = 'user_contact_application'
-        ordering = ['-created_at']
 
 
