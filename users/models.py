@@ -33,8 +33,21 @@ class UserCreateManager(UserManager):
 
 
 class User(AbstractUser):
+
+    class Language(models.TextChoices):
+        UZ = "UZ", "UZBEK"
+        RU = "RU", "RUSSIAN"
+
     phone_number = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
+    full_name = models.CharField(max_length=64)
+    balance = models.PositiveBigIntegerField()
+    is_pro = models.BooleanField(default=False)
+    pro_finish_at = models.DateTimeField()
+    language = models.CharField(max_length=2, 
+                                choices=Language.choices)
+    score = models.PositiveBigIntegerField()
+    
     username = None
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

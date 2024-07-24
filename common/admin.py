@@ -1,7 +1,7 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
-from common.models import Settings, Quotes, FAQ, Advertising, News
+from common.models import Settings, Quotes, FAQ, Advertising, News, NewsView
 
 
 @admin.register(Settings)
@@ -19,3 +19,4 @@ admin.site.register(Quotes)
 admin.site.register(FAQ)
 admin.site.register(News)
 admin.site.register(Advertising)
+admin.site.register(NewsView)
